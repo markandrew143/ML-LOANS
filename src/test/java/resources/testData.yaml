@@ -1,35 +1,10 @@
 Roles:
-  - role: admin
-    gmail_email: mark.celestial@mlhuillier.com
-    gmail_password: "Cele52346600000000"
-
-  - role: kpx_user
-    kpx_username: CELE1709653700
-    kpx_password: "$Cele1709653700"
-  #
-  #  PENDING KYC INFO
-  - role: Pending_KYC_Info
-    PendingLastname: Balansag Test
-    PendingFirstname: Rochelle Test
-
-  - role: Fee
-    Chattel_FEE: 100
-    Appraisal_FEE: 150
-    Notarial_FEE: 160
-    DST_FEE: 180
-#
-
-#  - role: invalidEmailAdmin
-#    gmail_email: ml-tg-qa-team.com
-#    gmail_password: "Mlinc1234a@"
-#
-#  - role: invalidPassAdmin
-#    gmail_email: ml-tg-qa-team@mlhuillier.com
-#    gmail_password: "Mlinc"
-#
-#  - role: noInput
-#    gmail_email: ""
-#    gmail_password: ""
-
-#Users: [09999999999, 09999999998, 09999999997, 09999999996, 09999999934]
+- {role: admin, gmail_email: mark.celestial@mlhuillier.com, gmail_password: Cele52346600000000}
+- {role: kpx_user, kpx_username: CELE1709653700, kpx_password: $Cele1709653700}
+- {role: Pending_KYC_Info, PendingLastname: Balansag Test, PendingFirstname: Rochelle
+    Test}
+- {role: Fee, Chattel_FEE: 100, Appraisal_FEE: 150, Notarial_FEE: 160, DST_FEE: 180}
 AccessKey: mnq5 vyvg hqki fpiu f434 vtom ohxj me3p
+LoanReferences: [MCRZRSJQBKQ, MCRXCUJETEG, MCRYWPUNSWX, MCRWSTQESYZ, MCRDSQPNALP,
+  MCRSIZBFFCE, MCREYAEFSFZ, MCRUIYQZWNA, MCRRDDWSJEY, MCRLUDIGSYQ, MCRMXPJYEHT, MCRARVJEDZP,
+  MCRHCSKKSIW, MCRIUMIORTI]

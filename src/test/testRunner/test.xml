@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SHOP" thread-count="6" >
+<suite name="ML LOANS" thread-count="6" >
     <listeners>
         <listener class-name="utilities.ExtentReport.ExtentReporter" />
         <!--        <listener class-name="utilities.RetryAnalyzer.RetryTransformer"/>-->
     </listeners>
 
-    <test name="SHOP">
+    <test name="PENDING LOAN">
         <parameter name="browser" value="chrome">
             <classes>
-                <class name="test_manager.test_sorter.LoginT">
+                <class name="test_manager.test_sorter.PendingApprovalT">
                 </class>
-                <!--                <class name="MLshopBuilders.actual.Cart">-->
-                <!--                </class>-->
-                <!--                <class name="MLshopBuilders.actual.Home">-->
-                <!--                </class>-->
             </classes>
         </parameter>
     </test>

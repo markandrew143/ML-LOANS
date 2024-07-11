@@ -472,6 +472,19 @@ public class GeneralMethod extends ExtentReporter{
             throw e;
         }
     }
+//    public static void scrollHorizontal(WebElement byLocator, int scrollValue) {
+//        try {
+//            WebElement divElement = getWebDriver().findElement(byLocator);
+//            JavascriptExecutor jsExecutor = (JavascriptExecutor) getWebDriver();
+//            jsExecutor.executeScript("arguments[0].scrollTop  = arguments[1]", divElement, scrollValue);
+//            LoggingUtils.info(">>Scrolled horizontally to using locator: " + byLocator);
+//            ExtentReporter.logInfo("Scroll horizontally ", "Scrolling vertically with the  value of :" + scrollValue);
+//        } catch (Exception e) {
+//            LoggingUtils.error(">>Failed to scroll horizontally using locator: " + byLocator + " - " + e.getMessage());
+//            ExtentReporter.logFail("Unable Scroll horizontally ", "Scrolling vertically with the  error of :" + e.getMessage());
+//            throw e;
+//        }
+//    }
     public void switchFrame(WebElement element) {
         try{
             driver.switchTo().frame(element);

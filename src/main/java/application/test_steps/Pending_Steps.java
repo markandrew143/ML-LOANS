@@ -1,9 +1,15 @@
 package application.test_steps;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import utilities.Logger.LoggingUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 public class Pending_Steps extends Base_Steps{
-
+    private String loanRefText;
 
     public void ClickPendingLoans(){
         click(pendingPageObject.Pending_Page(), "Go to Pending Loans");
@@ -48,11 +54,26 @@ public class Pending_Steps extends Base_Steps{
         click(pendingPageObject.Loan_Type(), "Loan Type Option");
         waitSleep(2000);
         click(pendingPageObject.LoanType_Value(), "Car Loan");
-        waitSleep(5000);
+        waitSleep(2000);
+        String loanRefText = getValue(pendingPageObject.LoanReference());
+        setLoanRefText(loanRefText);
+        List<String> loanRefValues = Collections.singletonList(loanRefText);
+        reader.writeLoanRef(loanRefValues);
+//        waitSleep(5000);
         scrollToElement(pendingPageObject.DSTFee());
         waitSleep(3000);
     }
+    public String getLoanRefText() {
+        return loanRefText;
+    }
 
+    public void setLoanRefText(String loanRefText) {
+        this.loanRefText = loanRefText;
+    }
+
+    public String getLoanRef(String ref) {
+        return ref;
+    }
     //CHATTEL FEE
     public void ChattelFee_Input (String role){
         type(pendingPageObject.ChattelFee(), "INPUT Chattel Fee", reader.Chattel_fee(role));
@@ -75,7 +96,7 @@ public class Pending_Steps extends Base_Steps{
         System.out.println("Click Selection For Business");
         waitSleep(2000);
         scrollToElement(pendingPageObject.BankStatement());
-        waitSleep(2000);
+//        waitSleep(2000);
     }
 
     public void BankStatement_Upload(){
@@ -93,26 +114,26 @@ public class Pending_Steps extends Base_Steps{
     public void AuditFinStatement_Upload(){
         uploadFile(pendingPageObject.audit_fin_statements(), filePathUtils.getAbsolutePath());
         System.out.println("get Image Upload  AuditFinStatement");
-        waitSleep(2000);
+//        waitSleep(2000);
     }
 
     public void LatestITR_Upload(){
         uploadFile(pendingPageObject.LatestITR(), filePathUtils.getAbsolutePath());
         System.out.println("get Image Upload  LatestITR");
-        waitSleep(2000);
+//        waitSleep(2000);
     }
 
     public void BillingStatement_Upload(){
         uploadFile(pendingPageObject.BillingStatement(), filePathUtils.getAbsolutePath());
         System.out.println("get Image Upload  Billing Statement");
-        waitSleep(2000);
+//        waitSleep(2000);
         scrollToElement(pendingPageObject.CollateralDetails());
         waitSleep(1500);
     }
     public void CollateralDetails(){
         click(pendingPageObject.CollateralDetails(),"Collateral Details Add row");
         System.out.println("Click Collateral Details Add Row");
-        waitSleep(2000);
+//        waitSleep(2000);
         scrollToElement(pendingPageObject.Remarks());
         waitSleep(2000);
     }
@@ -131,20 +152,51 @@ public class Pending_Steps extends Base_Steps{
         type(pendingPageObject.CollateralAppraisedAmount(), "Type Appraised Amount", "150");
         System.out.println("Input Principal Amount");
         waitSleep(2000);
+        //scrollHorizontal(pendingPageObject.collateralDetails(), 200);
+
 
     }
 
     public void CollateralOdometer_Upload(){
-        uploadFile(pendingPageObject.CollateralpicOdometer_Upload(), filePathUtils.getAbsolutePath());
+        //uploadFile(pendingPageObject.CollateralpicOdometer_Upload(), filePathUtils.getAbsolutePath());
+        for(WebElement inputFile : pendingPageObject.collateralInputFile()){
+            uploadFile(inputFile, filePathUtils.getAbsolutePath());
+        }
+        click(pendingPageObject.collateralDetails(), "Collateral Body");
+        scrollToElement(pendingPageObject.insertIcon());
+//        scrollVertically(By.xpath("//div[@class='jsgrid-grid-body']"), 200);
+//        for(int i=0; i < 50; i ++){
+//            actions.sendKeys(Keys.ARROW_RIGHT).perform();
+//            LoggingUtils.info("Arrow Key Right");
+//        }
+        waitSleep(800);
+        click(pendingPageObject.insertIcon(), "Plus Icon");
         System.out.println("get Image Upload  Vehicle Odometer");
         waitSleep(5000);
     }
 
     public void Remarks(){
+        scrollToBottomOfPageWEB();
         type(pendingPageObject.Remarks(), "Input Remarks", "Test Only");
         System.out.println("Input Remarks");
         waitSleep(2000);
     }
 
-    //for update
+    //method for clicking save and yes btn
+    public void clickSaveAndYes(){
+        //scrollToBottomOfPageWEB();
+//        waitSleep(1000);
+        click(pendingPageObject.saveButton(), "Save Button");
+        waitSleep(1000);
+        isVisible(pendingPageObject.savePrompt_msg(), getText(pendingPageObject.savePrompt_msg()));
+        click(pendingPageObject.yes_btn(), "Yes Button");
+        waitSleep(5000);
+        //isVisible(pendingPageObject.success_msg(), getText(pendingPageObject.success_msg()));
+    }
+    //method to verify in pending loans
+    public void verifyLoanRef_PendingLoansTab(){
+        if(getLoanRef(getLoanRefText()).equals(getText(pendingPageObject.firstPendingLoanRef()))){
+            passTest("Loan Ref is Present or Visible: " + getLoanRef(getLoanRefText()), "Success");
+        }
+    }
 }

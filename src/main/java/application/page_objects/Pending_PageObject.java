@@ -3,6 +3,8 @@ package application.page_objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static utilities.Driver.DriverManager.getDriver;
 
 public class Pending_PageObject {
@@ -52,6 +54,10 @@ public class Pending_PageObject {
 
     public WebElement LoanType_Value() {
         return getDriver().findElement(By.xpath("//div[contains(text(), 'Car Loan')]"));
+    }
+    //Successfully Updated Loan Transaction
+    public WebElement LoanReference(){
+        return getDriver().findElement(By.cssSelector("[placeholder='Loan Reference #']"));
     }
 
     //  CHATTEL FEE
@@ -133,4 +139,31 @@ public class Pending_PageObject {
     public WebElement Remarks() {
         return getDriver().findElement(By.xpath("//textarea[@placeholder='Remarks']"));
     }
+
+    public WebElement collateralDetails(){
+        return getDriver().findElement(By.xpath("//div[@class='jsgrid-grid-body']"));
+    }
+    public List<WebElement> collateralInputFile(){
+        return getDriver().findElements(By.xpath("//td[@class='jsgrid-cell']/div/input"));
+    }
+
+    public WebElement saveButton(){
+        return getDriver().findElement(By.xpath("//button[contains(text(), 'Save')]"));
+    }
+    public WebElement insertIcon(){return getDriver().findElement(By.cssSelector("[title='Insert']"));}
+
+    public WebElement savePrompt_msg(){
+        return getDriver().findElement(By.cssSelector("[class='swal2-title']"));
+    }
+    public WebElement yes_btn(){
+        return getDriver().findElement(By.cssSelector("[class='swal2-confirm swal2-styled swal2-default-outline']"));
+    }
+
+    public WebElement success_msg() {
+        return getDriver().findElement(By.xpath("//*[contains(text(), 'Successfully created loan transaction')]"));
+    }
+    public WebElement firstPendingLoanRef(){
+        return getDriver().findElement(By.xpath("(//tr[@level='0']/td[1])[1]"));
+    }
+    //
 }

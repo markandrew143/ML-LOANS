@@ -161,4 +161,26 @@ public class yamlReader {
     //         return null;
     //     }
     // }
+
+    public void writeLoanRef(List<String> values) {
+        try {
+            Yaml yaml = new Yaml();
+            FileInputStream fileInputStream = new FileInputStream(yamlFileName);
+            Map<String, Object> yamlData = yaml.load(fileInputStream);
+
+            if (yamlData.containsKey("LoanReferences")) {
+                List<String> existingValues = (List<String>) yamlData.get("LoanReferences");
+                existingValues.addAll(values);
+            } else {
+                yamlData.put("LoanReferences", values);
+            }
+
+            FileWriter writer = new FileWriter(yamlFileName);
+            yaml.dump(yamlData, writer);
+            LoggingUtils.info(values + " saved to file");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

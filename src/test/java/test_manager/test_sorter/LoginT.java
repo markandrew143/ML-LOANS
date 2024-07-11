@@ -10,27 +10,8 @@ public class LoginT extends BaseTest {
         loginSteps.clicklogintokpx();
         loginSteps.clickLoginGoogle();
         loginSteps.TypeLoginG_account("admin");
-//        loginSteps.TypeLoginG_account("AccessKey");
-//        loginSteps.clickLoginTryAnotherWay();
         loginSteps.TypeKPX_User("kpx_user");
         loginSteps.TypeKPX_Pass("kpx_user");
-        pendingSteps.ClickPendingLoans();
-        PendingCreateKYC.ClickCreateKYC();
-        PendingCreateKYC.PKYCINFO("Pending_KYC_Info");
-        PendingCreateKYC.OrigBranch_Dropdown();
-        PendingCreateKYC.LoanType_Dropdown();
-        PendingCreateKYC.ChattelFee_Input("Fee");
-        PendingCreateKYC.Selection_Dropdown();
-        PendingCreateKYC.BankStatement_Upload();
-        PendingCreateKYC.MayorsPermit_Upload();
-        PendingCreateKYC.AuditFinStatement_Upload();
-        PendingCreateKYC.LatestITR_Upload();
-        PendingCreateKYC.BillingStatement_Upload();
-        PendingCreateKYC.CollateralDetails();
-        PendingCreateKYC.CollateralUnit_Dropdown();
-        PendingCreateKYC.CollateralVehicle();
-        PendingCreateKYC.CollateralOdometer_Upload();
-        PendingCreateKYC.Remarks();
     }
 
     @Test(priority = 1, dependsOnMethods ="login", description = "Validate Login as User")

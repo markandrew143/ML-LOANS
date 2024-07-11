@@ -26,11 +26,9 @@ public class BaseTest {
         LoggingUtils.info("base test browser type: "+browser.toUpperCase());
 //        initializeDriver(DriverType.valueOf("REMOTE_CHROME"));
         initializeDriver(DriverType.valueOf(browser.toUpperCase()));
-        getDriver().manage().deleteAllCookies();
+//        getDriver().manage().deleteAllCookies();
         Thread.sleep(3000);
-        getDriver().get(System.getProperty("targetUrl"));
         LoggingUtils.info("Redirecting back to home");
-
         // homeSteps = new Home_Steps();
         // shippingSteps = new Shipping_Steps();
         // cartSteps = new Cart_Steps();
@@ -51,7 +49,7 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void clean(){
-        getDriver().manage().deleteAllCookies();
+        getDriver().get(System.getProperty("targetUrl"));
     }
     @AfterClass(alwaysRun = true)
     public void tearDown () {
