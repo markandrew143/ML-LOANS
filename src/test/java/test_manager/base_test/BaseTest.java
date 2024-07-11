@@ -1,18 +1,20 @@
 package test_manager.base_test;
 
+import application.test_steps.Login_Steps;
+import application.test_steps.Pending_Steps;
 import org.testng.annotations.*;
-
-import application.test_steps.*;
-
-import static utilities.Driver.DriverManager.*;
 import utilities.Driver.DriverType;
 import utilities.Logger.LoggingUtils;
 
+import static utilities.Driver.DriverManager.*;
+
 public class BaseTest {
-    // protected Login_Steps loginSteps;
     // protected Home_Steps homeSteps;
     // protected Shipping_Steps shippingSteps;
     // protected Cart_Steps cartSteps;
+    protected Login_Steps loginSteps;
+    protected Pending_Steps pendingSteps;
+    protected Pending_Steps PendingCreateKYC;
 
 
     @Parameters("browser")
@@ -28,10 +30,14 @@ public class BaseTest {
         Thread.sleep(3000);
         getDriver().get(System.getProperty("targetUrl"));
         LoggingUtils.info("Redirecting back to home");
-        // loginSteps = new Login_Steps();
+
         // homeSteps = new Home_Steps();
         // shippingSteps = new Shipping_Steps();
         // cartSteps = new Cart_Steps();
+        loginSteps = new Login_Steps();
+        pendingSteps = new Pending_Steps();
+        PendingCreateKYC = new Pending_Steps();
+
     }
     private void initializeDriver(DriverType driverType) {
         createDriver(driverType);
@@ -51,5 +57,4 @@ public class BaseTest {
     public void tearDown () {
         closeWebBrowser();
     }
-
 }

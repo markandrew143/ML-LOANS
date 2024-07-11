@@ -2,19 +2,18 @@ package utilities.ReusableComponents;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-
-import java.time.Duration;
-import java.util.Random;
-import java.util.Set;
-import java.util.List;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import utilities.ExtentReport.ExtentReporter;
 import utilities.Logger.LoggingUtils;
 import utilities.yamlReader.yamlReader;
-import org.testng.Assert;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import static utilities.Driver.DriverManager.getDriver;
 
@@ -29,14 +28,14 @@ public class GeneralMethod extends ExtentReporter{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
-    
+
     public void click(WebElement locator, String elementName){
         try {
             if (isDisplayed(locator)) {
                 WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
                 LoggingUtils.info("Clicked on element: " + elementName);
                 ExtentReporter.logInfo("Clicked on element: " + elementName, "");
-                actions.click(element).perform();          
+                actions.click(element).perform();
             }
         } catch (StaleElementReferenceException e){
             LoggingUtils.info("Stale Clicked on element: " + elementName + ":::: due to " + e);
@@ -61,12 +60,12 @@ public class GeneralMethod extends ExtentReporter{
                 ExtentReporter.logInfo("Typed into field: " + elementName , "Typed Value: "+ text);
                 element.clear();
                 actions.sendKeys(element, text)
-                .perform();
+                        .perform();
             }
         } catch (NoSuchElementException e) {
-        LoggingUtils.error("Failed to type into field: "+ elementName + ", Value: "+ text);
-        ExtentReporter.logFail("Failed to type into field: "+ elementName , " Typed Value:: "+ text);
-        throw new AssertionError("Failed to type into field: "+ elementName + ", Value: "+ text);
+            LoggingUtils.error("Failed to type into field: "+ elementName + ", Value: "+ text);
+            ExtentReporter.logFail("Failed to type into field: "+ elementName , " Typed Value:: "+ text);
+            throw new AssertionError("Failed to type into field: "+ elementName + ", Value: "+ text);
         }
     }
 
@@ -76,7 +75,7 @@ public class GeneralMethod extends ExtentReporter{
                 WebElement element = wait.until(ExpectedConditions.visibilityOf(locator));
                 LoggingUtils.info("Typed into field: " + elementName + ", Value: "+ text);
                 ExtentReporter.logInfo("Typed into field: " + elementName , "Typed Value: "+ text);
-                element.sendKeys(text + Keys.ENTER);           
+                element.sendKeys(text + Keys.ENTER);
             }
         } catch (NoSuchElementException e) {
             LoggingUtils.error("Failed to type into field: "+ elementName + ", Value: "+ text);
@@ -128,7 +127,7 @@ public class GeneralMethod extends ExtentReporter{
             LoggingUtils.error("Cannot get text for element" + e.getMessage());
             throw new AssertionError("Cannot get text for element" + e.getMessage());
         }
-       return val;
+        return val;
 
     }
 
@@ -234,11 +233,13 @@ public class GeneralMethod extends ExtentReporter{
 
         if (previousWindowHandle != null) {
             getWebDriver().switchTo().window(previousWindowHandle);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@placeholder='Username']")));
             LoggingUtils.info("Switch to " + previousWindowHandle);
             ExtentReporter.logInfo("Switch Previous Tab " ,"Previous Tab ID: "+ currentWindowHandle);
         } else {
             throw new IllegalStateException("No previous tab found");
-            
+
         }
     }
     public void scrollToBottomOfPageWEB() {
@@ -324,7 +325,7 @@ public class GeneralMethod extends ExtentReporter{
             for(int i=0; i< option; i++){
                 LoggingUtils.info("Performing Arrow Key Down" + i);
                 action.keyDown(Keys.SHIFT).sendKeys(Keys.ENTER)
-                .perform();
+                        .perform();
             }
         }catch(Exception e){
             throw new AssertionError("Assertion error: "+ e.getMessage());
@@ -352,7 +353,7 @@ public class GeneralMethod extends ExtentReporter{
             Actions action = new Actions(driver);
             for(int i=0; i< option; i++){
                 action.keyUp(Keys.SHIFT).sendKeys(Keys.ENTER)
-                .perform();
+                        .perform();
             }
         }catch(Exception e){
             throw new AssertionError("Assertion error: "+ e.getMessage());
@@ -439,8 +440,8 @@ public class GeneralMethod extends ExtentReporter{
     public void typeActiveElement(String text){
         try{
             actions.
-            sendKeys(text).
-            perform();
+                    sendKeys(text).
+                    perform();
         }finally{
             LoggingUtils.info("Entering text: " + text);
             ExtentReporter.logInfo("Entering text: " + text, "");
@@ -455,6 +456,20 @@ public class GeneralMethod extends ExtentReporter{
             LoggingUtils.error("Assertion error: "+ e.getMessage());
             ExtentReporter.logFail("Assertion error: "+ e.getMessage(), "Caused: "+ e);
             throw new AssertionError("Assertion error: "+ e.getMessage());
+        }
+    }
+
+    public static void scrollVertically(By byLocator, int scrollValue) {
+        try {
+            WebElement divElement = getWebDriver().findElement(byLocator);
+            JavascriptExecutor jsExecutor = (JavascriptExecutor) getWebDriver();
+            jsExecutor.executeScript("arguments[0].scrollLeft = arguments[1]", divElement, scrollValue);
+            LoggingUtils.info(">>Scrolled vertically to using locator: " + byLocator);
+            ExtentReporter.logInfo("Scroll Vertically ", "Scrolling vertically with the  value of :" + scrollValue);
+        } catch (Exception e) {
+            LoggingUtils.error(">>Failed to scroll vertically using locator: " + byLocator + " - " + e.getMessage());
+            ExtentReporter.logFail("Unable Scroll vertically ", "Scrolling vertically with the  error of :" + e.getMessage());
+            throw e;
         }
     }
     public void switchFrame(WebElement element) {

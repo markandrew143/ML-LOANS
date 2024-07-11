@@ -72,12 +72,60 @@ public class yamlReader {
         return null;
     }
 
+    public String getKYCLastname(String role){
+        Map<String, Object> roleData = getRoleData(role);
+        if (roleData != null) {
+            return roleData.get("PendingLastname").toString();
+        }
+        return null;
+    }
+
+    public String getKYCfirstname(String role){
+        Map<String, Object> roleData = getRoleData(role);
+        if (roleData != null) {
+            return roleData.get("PendingFirstname").toString();
+        }
+        return null;
+    }
+
+    public String Chattel_fee(String role){
+        Map<String, Object> roleData = getRoleData(role);
+        if (roleData != null) {
+            return roleData.get("Chattel_FEE").toString();
+        }
+        return null;
+    }
+
+    public String Appraisal_fee(String role){
+        Map<String, Object> roleData = getRoleData(role);
+        if (roleData != null) {
+            return roleData.get("Appraisal_FEE").toString();
+        }
+        return null;
+    }
+
+    public String Notarial_fee(String role){
+        Map<String, Object> roleData = getRoleData(role);
+        if (roleData != null) {
+            return roleData.get("Notarial_FEE").toString();
+        }
+        return null;
+    }
+
+    public String DST_fee(String role){
+        Map<String, Object> roleData = getRoleData(role);
+        if (roleData != null) {
+            return roleData.get("DST_FEE").toString();
+        }
+        return null;
+    }
+
     public String getAccessKey() {
         return (String) yamlData.get("AccessKey");
     }
     public String getRandomUser(){
         String user = "Users";
-            try {
+        try {
             @SuppressWarnings("unchecked")
             List<String> randomUser = (List<String>) yamlData.get(user);
             if (randomUser == null || randomUser.isEmpty()) {
@@ -86,7 +134,7 @@ public class yamlReader {
             }
             int randomIndex = new Random().nextInt(randomUser.size());
             String randomTagValue = randomUser.get(randomIndex);
-            // randomUser.remove(randomIndex);   
+            // randomUser.remove(randomIndex);
             return randomTagValue;
         } catch (Exception e) {
             e.printStackTrace();

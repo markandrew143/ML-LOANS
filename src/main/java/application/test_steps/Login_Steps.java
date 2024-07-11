@@ -1,47 +1,63 @@
 package application.test_steps;
-// package mlshopbuilder.testSteps;
 
-// import org.checkerframework.checker.units.qual.t;
-// import org.openqa.selenium.By;
-// import org.openqa.selenium.NoSuchElementException;
-// import org.openqa.selenium.WebElement;
-// import org.openqa.selenium.support.ui.ExpectedConditions;
-// import org.openqa.selenium.support.ui.WebDriverWait;
 
-// import java.time.Duration;
+import utilities.ReusableComponents.TOTPGenerator;
 
-// public class Login_Steps extends Base_Steps{
-//     String loginUrl = "https://mlshoppreprod.mlhuillier.com/authlogin";
-//     String registerUrl = "https://mlshoppreprod.mlhuillier.com/register";
+public class Login_Steps extends Base_Steps{
 
-//    public void login(){
-//     try{
-//         navigateLoginPage();
-//         waitSleep(2000);
-//         assertEqual(driver.getCurrentUrl(), loginUrl);
-//         typeEnter(loginPageObjects.mobileNumber_field(), "Mobile Number Field", reader.getRandomUser());
-//         waitSleep(5000);
-//         if(isVisible(loginPageObjects.otpMessage(), getText(loginPageObjects.otpMessage()))){
-//             inputOTP();
-//             click(loginPageObjects.okay_Btn(), "Okay Button");
-//             waitSleep(1000);
-//             assertEqual(driver.getCurrentUrl(), System.getProperty("targetUrl"));
-//             passTest("LOGIN SUCESS", "");
-//         }else{
-//             failTest("FAILED TO LOGIN", "");
-//         }
-//     }catch(Exception e){
-//         failTest("FAILED TO LOGIN", "Due to :" + e);
-//     }
-      
-//    }
-//    public void inputOTP(){
-//        for(int i = 1; i <= 6 ; i++){
-//         typeActiveElement(String.valueOf(i));
+    public void clicklogintokpx()
+    {
+        click(loginPageObjects.LOGINKPX_button(), "Login to KPX");
+        System.out.println("LOGIN TO KPX QWERTY");
+        waitSleep(5000);
+//        getWebDriver().navigate().refresh();
+    }
+
+    public void clickLoginGoogle()
+    {
+        click(loginPageObjects.LOGINGOOGLE_button2(), "Login to Google");
+        System.out.println("LOGIN TO google");
+        waitSleep(5000);
+        switchToNextTab();
+    }
+
+    public void TypeLoginG_account(String role) throws Exception{
+        typeEnter(loginPageObjects.LogGAccount_EnterEmail(), "Gmail Account", reader.getEmailByRole(role));
+        waitSleep(5000);
+        typeEnter(loginPageObjects.LogGAccount_EnterPass(), "Gmail PassAccount", reader.getPasswordByRole(role));
+        waitSleep(5000);
+        typeEnter(loginPageObjects.LoginOTP_Account(), "Gmail OTP", TOTPGenerator.getTwoFactorCode());
+        switchToNextTab();
+        waitSleep(10000);
+        System.out.println("KPX LOGIN");
+    }
+    public void clickLoginTryAnotherWay() throws Exception{
+        click(loginPageObjects.LoginTryAnother_Account(),"Try Another Way ");
+        System.out.println(" Click Try Another Way");
+    }
+
+    public void TypeKPX_User (String role) throws Exception{
+        type(loginPageObjects.TypeKPX_User(), "Input KPX USer", reader.getKpxUsername(role));
+        System.out.println(" Input Username");
+    }
+
+    public void TypeKPX_Pass (String role) throws Exception{
+        typeEnter(loginPageObjects.TypeKPX_Pass(), "Input KPX Pass", reader.getKpxPassword(role));
+        System.out.println(" Input Password");
+        waitSleep(5000);
+        switchToNextTab();
+        waitSleep(5000);
+    }
+
+//      public boolean isInHomePage(){
+//        waitSleep(10000);
+//        if (isVisible(loginPageObjects.LoginKpx_Account(), "Search KPC Field")) {
+//            LoggingUtils.info("Successfully directed to the Homepage");
+//            return true;
+//        } else {
+//            LoggingUtils.error("Failed directed to the Homepage");
+//            ExtentReporter.logFail("!isInHomePage", "Failed directed to the Homepage ");
+//            return false;
 //        }
 //    }
-
-//    public void navigateLoginPage(){
-//     click(home_PageObjects.userIcon(), "User Icon"); 
-//    }
-// }
+}
