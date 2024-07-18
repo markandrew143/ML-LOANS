@@ -26,6 +26,8 @@ public class Login_Steps extends Base_Steps{
         waitSleep(5000);
         typeEnter(loginPageObjects.LogGAccount_EnterPass(), "Gmail PassAccount", reader.getPasswordByRole(role));
         waitSleep(5000);
+        click(loginPageObjects.clickverification(),"Verification");
+        System.out.println("KPX LOGIN");
         typeEnter(loginPageObjects.LoginOTP_Account(), "Gmail OTP", TOTPGenerator.getTwoFactorCode());
         switchToNextTab();
         waitSleep(10000);
@@ -34,6 +36,7 @@ public class Login_Steps extends Base_Steps{
     public void clickLoginTryAnotherWay() throws Exception{
         click(loginPageObjects.LoginTryAnother_Account(),"Try Another Way ");
         System.out.println(" Click Try Another Way");
+        waitSleep(2000);
     }
 
     public void TypeKPX_User (String role) throws Exception{

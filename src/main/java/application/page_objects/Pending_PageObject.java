@@ -55,6 +55,7 @@ public class Pending_PageObject {
     public WebElement LoanType_Value() {
         return getDriver().findElement(By.xpath("//div[contains(text(), 'Car Loan')]"));
     }
+
     //Successfully Updated Loan Transaction
     public WebElement LoanReference(){
         return getDriver().findElement(By.cssSelector("[placeholder='Loan Reference #']"));
@@ -94,6 +95,7 @@ public class Pending_PageObject {
     public WebElement Mayors_Permit() {
         return getDriver().findElement(By.xpath("//input[@name='mayors_permit\t']"));
     }
+
 
     public WebElement audit_fin_statements() {
         return getDriver().findElement(By.xpath("//input[@name='audit_fin_statements\t']"));
@@ -165,5 +167,80 @@ public class Pending_PageObject {
     public WebElement firstPendingLoanRef(){
         return getDriver().findElement(By.xpath("(//tr[@level='0']/td[1])[1]"));
     }
-    //
+
+    //================================================MOTOR LOAN---------------------------------------
+    //-------------------------------------------------------------------------------------------------
+
+    public WebElement LoanType_ValueMotor() {
+        return getDriver().findElement(By.xpath("//div[contains(text(), 'Motor Loan')]"));
+    }
+
+    public WebElement Mayors_PermitMotor(){
+        return getDriver().findElement(By.xpath("//input[@name='mayors_permit']"));
+    }
+
+    public WebElement DTI(){
+        return getDriver().findElement(By.xpath("//input[@name='dti']"));
+    }
+
+    public WebElement audit_fin_statementsmotor() {
+        return getDriver().findElement(By.xpath("//input[@name='audit_fin_statements']"));
+    }
+
+    public WebElement CollateralVehiclemotor() {
+        return getDriver().findElement(By.xpath("(//input[@type='text'])[34]"));
+    }
+
+    public WebElement CollateralPrincipalAmountmotor() {
+        return getDriver().findElement(By.xpath("(//input[@type='text'])[35]"));
+    }
+
+    public WebElement CollateralAppraisedAmountmotor() {
+        return getDriver().findElement(By.xpath("(//input[@type='number'])[3]"));
+    }
+
+    //===========================================REAL ESTATE LOAN---------------------------------------
+    //--------------------------------------------------------------------------------------------------
+
+
+    public WebElement LoanType_ValueEstate() {
+        return getDriver().findElement(By.xpath("//div[contains(text(), 'Real Estate Loan')]"));
+    }
+
+    public WebElement REMortgage_Estate(){
+        return getDriver().findElement(By.xpath("//input[@name='mortgage_fee']"));
+    }
+
+    public WebElement MLInsurance_Estate(){
+        return getDriver().findElement(By.xpath("//input[@name='ml_insurance']"));
+    }
+
+    public WebElement DST_Estate(){
+        return getDriver().findElement(By.xpath("//input[@name='dst_custom']"));
+    }
+
+    public WebElement TCTNumberEstate(){
+        return getDriver().findElement(By.xpath("(//input[@type='text'])[37]"));
+    }
+
+    public WebElement PropertyDescEstate(){
+        return getDriver().findElement(By.xpath("(//input[@type='text'])[38]"));
+    }
+
+    public WebElement PrincipalAmountEstate(){
+        return getDriver().findElement(By.xpath("(//input[@type='number'])[3]"));
+    }
+
+    public WebElement LandTitleEstate(){
+        return getDriver().findElement(By.xpath("(//input[@type='text'])[39]"));
+    }
+
+    public WebElement PreprocessingFee(){
+        return getDriver().findElement(By.xpath("//input[@placeholder='Amount']"));
+    }
+
+    public WebElement PreprocessSave(){
+        return getDriver().findElement(By.xpath("(//button[@type='button'])[18]"));
+    }
+
 }

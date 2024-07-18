@@ -36,6 +36,10 @@ public class Login_PageObjects {
         return getDriver().findElement(By.xpath("//input[@type='tel']"));
     }
 
+    public WebElement clickverification(){
+        return getDriver().findElement(By.xpath("(//div[@class='l5PPKe'])[2]"));
+    }
+
     public WebElement LoginTryAnother_Account(){
         return getDriver().findElement(By.xpath(("//span[@class='VfPpkd-vQzf8d'])[2]")));
     }
